@@ -1,13 +1,17 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
+	firebase "firebase.google.com/go/v4"
 	"github.com/eyob1324/ocr-translate-Backend/config"
 	"github.com/eyob1324/ocr-translate-Backend/internal/api"
+	"github.com/eyob1324/ocr-translate-Backend/internal/auth"
+	"google.golang.org/api/option"
 )
 
 func main() {
@@ -17,7 +21,19 @@ func main() {
 		log.Fatalf("Failed to load configuration: %v", err)
 	}
 
-	fmt.Println(cfg)
+	//fmt.Println(cfg.FirebaseCredentials)
+	// Initialize Firebase app
+	opt := option.WithCredentialsJSON(cfg.FirebaseCredentials)
+	app, err := firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		log.Fatalf("Failed to initialize Firebase app: %v", err)
+	}
+
+	// Get Firebase Auth client
+	authClient, err := app.Auth(context.Background())
+	if err != nil {
+		log.Fatalf("Failed to create Firebase Auth client: %v", err)
+	}
 
 	// Initialize API handlers
 	handler, err := api.NewHandler(cfg)
@@ -25,8 +41,9 @@ func main() {
 		log.Fatalf("Failed to create handler: %v", err)
 	}
 
+	authMiddleware := auth.NewFirebaseAuthMiddleware(authClient)
 	// Set up routes
-	http.HandleFunc("/translate", handler.TranslateHandler)
+	http.Handle("/translate", authMiddleware.Authenticate(http.HandlerFunc(handler.TranslateHandler)))
 
 	// Start the server
 	port := os.Getenv("PORT")
