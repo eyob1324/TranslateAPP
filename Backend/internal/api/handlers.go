@@ -4,9 +4,11 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"html"
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/eyob1324/ocr-translate-Backend/config"
 
@@ -133,7 +135,7 @@ func (h *Handler) TranslateHandler(w http.ResponseWriter, r *http.Request) {
 	for i, block := range ocrResult.Blocks {
 		textBlocks[i] = imageprocessing.TextBlock{
 			OriginalText:   block.Text,
-			TranslatedText: translatedResults[i+1].Translated,
+			TranslatedText: strings.ToValidUTF8(html.UnescapeString(translatedResults[i+1].Translated), ""),
 			Bounds:         block.Bounds,
 		}
 	}
