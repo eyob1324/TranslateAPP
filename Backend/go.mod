@@ -6,12 +6,16 @@ require (
 	cloud.google.com/go/translate v1.12.0
 	cloud.google.com/go/vision v1.2.0
 	firebase.google.com/go/v4 v4.14.1
+	github.com/disintegration/imaging v1.6.2
+	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/joho/godotenv v1.5.1
-	golang.org/x/image v0.23.0
+	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	golang.org/x/text v0.21.0
 	google.golang.org/api v0.193.0
 	google.golang.org/genproto v0.0.0-20240814211410-ddb44dafa142
 )
+
+require golang.org/x/image v0.23.0
 
 require (
 	cloud.google.com/go v0.115.1 // indirect
@@ -28,7 +32,6 @@ require (
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
-	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/s2a-go v0.1.8 // indirect

@@ -1,0 +1,7 @@
+PT Serif: english , spanish , German ,italian , Portuguese , russian
+Gowun Batang: French
+ZCOOL  XiaoWei: simplified chinese
+M PLUS ROUNDED 1c: Japan
+Nanum Gothic: Korea
+Abyssinica SIL: Amharic , Tigrinya
+
