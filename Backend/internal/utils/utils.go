@@ -29,6 +29,8 @@ var languageCodes = map[string]string{
 	"zh-CN": FontDir + "ZCOOLXiaoWei-Regular.ttf",   // Chinese (Simplified - using "zh" for simplicity)
 	"ja":    FontDir + "MPLUSRounded1c-Regular.ttf", // Japanese
 	"ko":    FontDir + "NanumGothic-Regular.ttf",    // Korean
+	// Arabic script languages
+	"ar": FontDir + "Tajawal-Regular.ttf", // Arabic
 
 	// Ethiopic script languages
 	"am": FontDir + "AbyssinicaSIL-Regular.ttf", // Amharic
